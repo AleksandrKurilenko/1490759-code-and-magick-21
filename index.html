@@ -179,24 +179,24 @@
   </template>
 
   <script>
-    const fireballSize = 22;
+    var fireballSize = 22;
 
-    const getFireballSpeed = (isMovingLeft) => {
+    var getFireballSpeed = (isMovingLeft) => {
       return isMovingLeft ? 2 : 5;
     }
 
-    const wizardWidth = 70;
+    var wizardWidth = 70;
 
-    const getWizardHeight = () => {
+    var getWizardHeight = () => {
       return 1.337 * wizardWidth;
     }
 
-    const wizardSpeed = 3;
+    var wizardSpeed = 3;
 
-    const getWizardX = (gameFieldWidth) => {
+    var getWizardX = (gameFieldWidth) => {
       return (gameFieldWidth - wizardWidth) / 2;
     }
-    const getWizardY = (gameFieldHeight) => {
+    var getWizardY = (gameFieldHeight) => {
       return gameFieldHeight / 3;
     }
 

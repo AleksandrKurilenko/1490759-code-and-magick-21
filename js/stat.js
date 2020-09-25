@@ -5,16 +5,14 @@ var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
-var FONT_GAP = 15;
-var TEXT_WIDTH = 50;
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
 var barX = CLOUD_X + (GAP * 5);
 var basicColor = '#000';
 
 var getRandom = (number) => {
-  return Math.ceil(Math.random() * number)
-}
+  return Math.ceil(Math.random() * number);
+};
 
 var renderCloud = (ctx, x, y, color) => {
   ctx.fillStyle = color;
@@ -34,18 +32,8 @@ var getMaxElement = (arr) => {
 };
 
 window.renderStatistics = (ctx, names, times) => {
-  renderCloud(
-    ctx,
-    CLOUD_X + GAP,
-    CLOUD_Y + GAP,
-    'rgba(0, 0, 0, 0.7)'
-  );
-  renderCloud(
-    ctx,
-    CLOUD_X,
-    CLOUD_Y,
-    '#fff'
-  );
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
   ctx.fillStyle = basicColor;
 
@@ -61,27 +49,14 @@ window.renderStatistics = (ctx, names, times) => {
 
     ctx.fillStyle = basicColor;
 
-    ctx.fillText(
-      names[i],
-      barX + ((GAP * 5) + BAR_WIDTH) * i,
-      CLOUD_Y * 26
-    );
+    ctx.fillText(names[i], barX + ((GAP * 5) + BAR_WIDTH) * i, CLOUD_Y * 26);
 
-    names[i] === 'Вы' ? ctx.fillStyle = 'hsl(0, 100%, 50%)' : ctx.fillStyle = 'hsl(240, ' + getRandom(100) + '%, 50%)';
-
-    ctx.fillRect(
-      barX + ((GAP * 5) + BAR_WIDTH) * i,
-      CLOUD_Y * 24,
-      BAR_WIDTH,
-      barY
-    );
+    var colorBar = names[i] === 'Вы' ? ctx.fillStyle = 'hsl(0, 100%, 50%)' : ctx.fillStyle = 'hsl(240, ' + getRandom(100) + '%, 50%)';
+    ctx.fillStyle = colorBar;
+    ctx.fillRect(barX + ((GAP * 5) + BAR_WIDTH) * i, CLOUD_Y * 24, BAR_WIDTH, barY);
 
     ctx.fillStyle = basicColor;
 
-    ctx.fillText(
-      Math.round(times[i]),
-      barX + ((GAP * 5) + BAR_WIDTH) * i,
-      barY + (GAP * 23)
-    );
+    ctx.fillText(Math.round(times[i]), barX + ((GAP * 5) + BAR_WIDTH) * i, barY + (GAP * 23));
   }
 };

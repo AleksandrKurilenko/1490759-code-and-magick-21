@@ -7,8 +7,16 @@ var CLOUD_Y = 10;
 var GAP = 10;
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
-var barX = CLOUD_X + (GAP * 5);
+var TITLE_X = 130;
+var TITLE_Y = 40;
+var NAME_Y = 260;
+var BAR_X = CLOUD_X + (GAP * 5);
+var BAR_Y = 240;
+var BAR_GAP = ((GAP * 5) + BAR_WIDTH);
+var TIME_Y = (GAP * 23);
 var basicColor = '#000';
+var cloudColor = '#fff';
+var shadowColor = 'rgba(0, 0, 0, 0.7)';
 
 var getRandom = (number) => {
   return Math.ceil(Math.random() * number);
@@ -32,31 +40,31 @@ var getMaxElement = (arr) => {
 };
 
 window.renderStatistics = (ctx, names, times) => {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, shadowColor);
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, cloudColor);
 
   ctx.fillStyle = basicColor;
 
   var maxTime = getMaxElement(times);
 
   ctx.font = '16px PT Mono';
-  ctx.fillText('Ура вы победили!', 130, 40);
-  ctx.fillText('Список результатов:', 130, 60);
+  ctx.fillText('Ура вы победили!', TITLE_X, TITLE_Y);
+  ctx.fillText('Список результатов:', TITLE_X, TITLE_Y + GAP + GAP);
 
   for (var i = 0; i < names.length; i++) {
 
-    var barY = (-BAR_HEIGHT * times[i]) / maxTime;
+    var barH = (-BAR_HEIGHT * times[i]) / maxTime;
 
     ctx.fillStyle = basicColor;
 
-    ctx.fillText(names[i], barX + ((GAP * 5) + BAR_WIDTH) * i, CLOUD_Y * 26);
+    ctx.fillText(names[i], BAR_X + BAR_GAP * i, NAME_Y);
 
-    var colorBar = names[i] === 'Вы' ? ctx.fillStyle = 'hsl(0, 100%, 50%)' : ctx.fillStyle = 'hsl(240, ' + getRandom(100) + '%, 50%)';
+    var colorBar = names[i] === 'Вы' ? 'hsl(0, 100%, 50%)' : 'hsl(240, ' + getRandom(100) + '%, 50%)';
     ctx.fillStyle = colorBar;
-    ctx.fillRect(barX + ((GAP * 5) + BAR_WIDTH) * i, CLOUD_Y * 24, BAR_WIDTH, barY);
+    ctx.fillRect(BAR_X + BAR_GAP * i, BAR_Y, BAR_WIDTH, barH);
 
     ctx.fillStyle = basicColor;
 
-    ctx.fillText(Math.round(times[i]), barX + ((GAP * 5) + BAR_WIDTH) * i, barY + (GAP * 23));
+    ctx.fillText(Math.round(times[i]), BAR_X + BAR_GAP * i, barH + TIME_Y);
   }
 };
